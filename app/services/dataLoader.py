@@ -30,6 +30,8 @@ def load_data():
                        },
               inplace=True)
 
+    df = remove_outliers(df)
+
     df = data_maps(df)
 
     return df
@@ -78,5 +80,15 @@ def data_maps(df: pd.DataFrame) -> pd.DataFrame:
     df['marca_Code'] = df['marca'].map(marcas_map)
     df['combustivel_Code'] = df['combustivel'].map(tipos_combustivel)
     df['cambio_Code'] = df['cambio'].map(tipos_cambio)
+
+    return df
+
+
+# essa funcão faz uma correção nos preços pois tem uma variancia muito desproporcional entre o maior e menor valor
+def remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
+    q1 = df['preco_medio_FIPE'].quantile(0.25)  # primeiro quartil
+    q3 = df['preco_medio_FIPE'].quantile(0.75)  # terceiro quartil
+    iqr = q3 - q1  # Intervalo interquartil
+    df = df[(df['preco_medio_FIPE'] >= (q1 - 1.5 * iqr)) & (df['preco_medio_FIPE'] <= (q3 + 1.5 * iqr))]
 
     return df
