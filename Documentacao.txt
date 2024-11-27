@@ -1,0 +1,43 @@
+
+
+cronograma
+
+01/11/2024 - 07/11/2024
+- Planejamento do projeto
+- Definição do escopo
+- Definição da equipe
+- criação do cronograma
+- divisão de tarefas
+
+08/11/2024 - 14/11/2024
+- configuração do ambiente de desenvolvimento
+- limpeza e preparação dos dados
+- design e estrutura das Views e templetes
+
+15/11/2024 - 21/11/2024
+- implementação algoritimo de machine learning
+- integração da predição Django
+- adição dos graficos
+
+22/11/2024 - 29/11/2024
+- testes e ajustes finais
+- finalização da documentação
+
+
+
+Resumo atividades
+
+Definir Tema e Objetivos
+Exploração Inicial dos Dados
+Planejamento do Dashboard
+Configuração do Ambiente de Desenvolvimento
+Limpeza e Pré-processamento dos Dados
+Estruturação da Aplicação Django
+Desenvolvimento do Algoritmo de Machine Learning
+Integração do Modelo com Django
+Criação de Gráficos e Visualizações
+Testes de Integração e Funcionalidade
+Ajustes Finais e Otimizações
+Documentação
+Preparação da Apresentação
+Apresentação Final
