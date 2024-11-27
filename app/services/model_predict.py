@@ -2,6 +2,8 @@ from django.http import JsonResponse
 import joblib
 import pandas as pd
 
+# Previsão de preço, com base nas informações de entrada através do aprendizado de máquina
+
 def predictPrice(request):
     if request.method == 'POST':
         model = joblib.load('../static/media/model_fipe.pkl')
@@ -13,11 +15,9 @@ def predictPrice(request):
         anoModelo = int(data['anoModelo'])
         anoReferencia = int(data['anoReferencia'])
 
-        # Transformar a marca usando o Label Encoder
         marca_ = le.transform([marca])[0]
         modelo_ = le.transform([modelo])[0]
 
-        # Criar o dataframe com os dados recebidos
         features = pd.DataFrame({
             'marca': [marca_],
             'modelo': [modelo_],

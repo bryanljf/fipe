@@ -2,6 +2,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 import joblib
 
+# Treinamento do modelo com base no dataset
+
 def trainModel(df):
     X = df[['marca_', 'modelo_', 'anoModelo', 'anoReferencia']] 
     y = df['preco']  
@@ -12,3 +14,5 @@ def trainModel(df):
     model.fit(X_train, y_train)
 
     joblib.dump(model, '../static/media/model_fipe.pkl')
+
+    return

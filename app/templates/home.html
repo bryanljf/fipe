@@ -8,6 +8,22 @@
     <title>Home Tabela Fipe</title>
 </head>
 <body>
-    
+    <div>
+        <form action="{% url 'home' %}" method="POST">
+            {% csrf_token %}
+
+            <label for="brand">Marca:</label> 
+            <select name="brand" id="brand">
+                <option value="">Selecionar Marca</option>
+                {% for marca in marcas %}
+                    <option value="{{ marca }}" {% if marca == selected_brand %}selected{% endif %}>
+                        {{ marca }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 </body>
 </html>
