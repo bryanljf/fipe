@@ -60,7 +60,8 @@ def data_maps(df: pd.DataFrame) -> pd.DataFrame:
 
     # Mantendo apenas as colunas relevantes
     columns_to_keep = ['modelo', 'marca', 'preco_medio_FIPE', 'modelo_code', 'combustivel_code', 'cambio_code', 'marca_code', 'idade_veiculo']
-    df = df.drop(columns=[col for col in df.columns if col not in columns_to_keep]) # Mantém apenas as colunas especificadas  # Manter apenas as colunas especificadas
+    df = df.drop(columns=[col for col in df.columns if col not in columns_to_keep]) # Mantém apenas as colunas especificadas  
+  
 
     # Renomeando as colunas para refletir o código mapeado
     df.rename(columns={

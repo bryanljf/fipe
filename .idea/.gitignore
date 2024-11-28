@@ -6,3 +6,7 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# Ignorar arquivos específicos 
+/static/data/fipe_2022.csv
+/data/media/model_fipe.pkl
