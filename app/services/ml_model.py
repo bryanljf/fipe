@@ -1,11 +1,15 @@
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 import joblib
+from fipe.settings import BASE_DIR
+
+pkl_path = os.path.join(BASE_DIR, 'app', 'static', 'media', 'model_fipe.pkl')
 
 # Treinamento do modelo com base no dataset
 def trainModel(df):
     # Definindo as variáveis independentes (X) removendo colunas não necessárias para a previsão
-    x = df.drop(columns=['preco_medio_FIPE', 'modelo', 'combustivel', 'cambio', 'marca'])
+    x = df[['marca_code', 'modelo_code', 'combustivel', 'cambio', 'idade_veiculo']]
 
     # Definindo a variável dependente (y) que queremos prever
     y = df['preco_medio_FIPE']
@@ -20,6 +24,6 @@ def trainModel(df):
     model.fit(x_train, y_train)
     
     # Salvando o modelo treinado em um arquivo .pkl usando joblib
-    joblib.dump(model, '../static/media/model_fipe.pkl')
+    joblib.dump(model, pkl_path)
 
     return

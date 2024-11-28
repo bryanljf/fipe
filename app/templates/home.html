@@ -6,6 +6,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Tabela Fipe</title>
+    <script>
+        // Função para carregar os modelos de acordo com a marca selecionada
+        function carregarModelos() {
+            var marcaSelecionada = document.getElementById("brand").value;
+
+            // Verifica se uma marca foi selecionada
+            if (marcaSelecionada) {
+                // Faz a requisição AJAX para obter os modelos
+                fetch(`/get_models/?marca=${marcaSelecionada}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var modeloSelect = document.getElementById("model");
+                        modeloSelect.innerHTML = '<option value="">Selecionar Modelo</option>'; // Limpa as opções existentes
+
+                        // Adiciona os novos modelos ao select
+                        data.modelos.forEach(function(modelo) {
+                            var option = document.createElement("option");
+                            option.value = modelo;
+                            option.textContent = modelo;
+                            modeloSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Erro ao carregar modelos:', error);
+                    });
+            } else {
+                // Se nenhuma marca foi selecionada, limpa os modelos
+                document.getElementById("model").innerHTML = '<option value="">Selecionar Modelo</option>';
+            }
+        }
+
+        // Adiciona o evento para chamar a função sempre que a marca for alterada
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("brand").addEventListener("change", carregarModelos);
+        });
+    </script>
 </head>
 <body>
     <div>
@@ -22,7 +58,42 @@
                 {% endfor %}
             </select>
 
-            <button type="submit">Enviar</button>
+            <label for="model">Modelo:</label> 
+            <select name="model" id="model">
+                <option value="">Selecionar Marca</option>
+                {% for modelo in modelos %}
+                    <option value="{{ modelo }}" {% if modelo == selected_modelo %}selected{% endif %}>
+                        {{ modelo }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="combustivel">Combustível:</label>
+            <select name="combustivel" id="combustivel">
+                <option value="Gasoline" {% if selected_combustivel == 'Gasoline' %}selected{% endif %}>Gasolina</option>
+                <option value="Diesel" {% if selected_combustivel == 'Diesel' %}selected{% endif %}>Diesel</option>
+                <option value="Alcohol" {% if selected_combustivel == 'Alcohol' %}selected{% endif %}>Álcool</option>
+            </select>
+
+            <label for="cambio">Câmbio:</label>
+            <select name="cambio" id="cambio">
+                <option value="manual" {% if selected_cambio == 'manual' %}selected{% endif %}>Manual</option>
+                <option value="automatic" {% if selected_cambio == 'automatic' %}selected{% endif %}>Automático</option>
+            </select>
+
+            <!-- Select para ano -->
+            <label for="ano">Ano:</label>
+            <select name="ano" id="ano">
+                {% for ano in anos %}
+                    <option value="{{ ano }}" {% if selected_ano == ano %}selected{% endif %}>{{ ano }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Consultar Previsão de Preço">
+
+            {% if predict_key == 1%}
+                <p>{{ predicted_price }}</p>
+            {% endif %}
         </form>
     </div>
 </body>
