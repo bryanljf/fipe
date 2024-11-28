@@ -4,8 +4,9 @@ import joblib
 
 # Treinamento do modelo com base no dataset
 
+
 def trainModel(df):
-    x = df.drop(columns=['preco_medio_FIPE'])
+    x = df.drop(columns=['preco_medio_FIPE', 'modelo', 'combustivel', 'cambio', 'marca'])
     y = df['preco_medio_FIPE']
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)

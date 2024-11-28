@@ -1,4 +1,5 @@
-"""services/dataLoader.py
+"""
+services/dataLoader.py
 serve para carregar os dados do arquivo csv e fazer o tratamento dos dados
 """
 from sklearn.preprocessing import LabelEncoder
@@ -30,7 +31,7 @@ def load_data():
                        },
               inplace=True)
 
-    df = remove_outliers(df)
+    df = remove_outliers(df)  # chamada da funcao de remocao de dados discrepantes
 
     df = data_maps(df)
 
@@ -73,13 +74,13 @@ def data_maps(df: pd.DataFrame) -> pd.DataFrame:
 
     # label enconder transforma em numeros os modelos
     le = LabelEncoder()
-    df['modelo'] = le.fit_transform(df['modelo'])
+    df['modelo_Code'] = le.fit_transform(df['modelo'])
 
     # fazendo novas colunas com as numerações respectivas do mapeamento
     df['mes_de_referencia'] = df['mes_de_referencia'].map(mapeamento_mes)
-    df['marca_Code'] = df['marca'].map(marcas_map)
-    df['combustivel_Code'] = df['combustivel'].map(tipos_combustivel)
-    df['cambio_Code'] = df['cambio'].map(tipos_cambio)
+    df['marca_code'] = df['marca'].map(marcas_map)
+    df['combustivel_code'] = df['combustivel'].map(tipos_combustivel)
+    df['cambio_code'] = df['cambio'].map(tipos_cambio)
 
     return df
 

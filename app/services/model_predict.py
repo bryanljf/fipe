@@ -4,6 +4,7 @@ import pandas as pd
 
 # Previsão de preço, com base nas informações de entrada através do aprendizado de máquina
 
+# ------------------------REVER nomenclatura-------------------------
 def predictPrice(request):
     if request.method == 'POST':
         model = joblib.load('../static/media/model_fipe.pkl')

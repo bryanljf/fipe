@@ -1,7 +1,9 @@
 
+# TEMA:
+Previsão de Valores de Carros com base na tabela FIPE
 
-cronograma
 
+# CRONOGRAMA
 01/11/2024 - 07/11/2024
 - Planejamento do projeto
 - Definição do escopo
@@ -24,20 +26,13 @@ cronograma
 - finalização da documentação
 
 
+# Divisão de tarefas
 
-Resumo atividades
+Membro 1: Desenvolvimento da aplicação web (Django/Flask).
+Membro 2: Manipulação de dados, EDA, e criação de gráficos (Pandas, Seaborn, Matplotlib).
+Membro 3: Modelagem de machine learning e integração do modelo (Scikit-learn).
+Membro 4: Documentação, elaboração do README e preparação da apresentação.
 
-Definir Tema e Objetivos
-Exploração Inicial dos Dados
-Planejamento do Dashboard
-Configuração do Ambiente de Desenvolvimento
-Limpeza e Pré-processamento dos Dados
-Estruturação da Aplicação Django
-Desenvolvimento do Algoritmo de Machine Learning
-Integração do Modelo com Django
-Criação de Gráficos e Visualizações
-Testes de Integração e Funcionalidade
-Ajustes Finais e Otimizações
-Documentação
-Preparação da Apresentação
-Apresentação Final
+# RECURSOS
+
+
