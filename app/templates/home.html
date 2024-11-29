@@ -71,14 +71,28 @@
                     console.error("Erro ao gerar gráfico:", error);
                 });
         }
+        function altGrafico(tipo){
+            if (tipo == 'preco_por_carros'){
+                document.getElementById("graph").src = "{{ grafico_uri.0 }}"; 
+            }
+            if (tipo == 'preco_por_marca'){
+                document.getElementById("graph").src = "{{ grafico_uri.1 }}"; 
+            }
+            if (tipo == 'preco_por_combustivel'){
+                document.getElementById("graph").src = "{{ grafico_uri.2 }}"; 
+            }
+            if (tipo == 'preco_por_cambio'){
+                document.getElementById("graph").src = "{{ grafico_uri.3 }}"; 
+            }
+        }
     </script>
 </head>
 <body>
 <div class="button-container">
-    <button type="button" onclick="mostrarGrafico('preco_por_marca')">Preço por Marca</button>
-    <button type="button" onclick="mostrarGrafico('preco_por_ano')">Preço por Ano</button>
-    <button type="button" onclick="mostrarGrafico('preco_por_combustivel')">Preço por Combustível</button>
-    <button type="button" onclick="mostrarGrafico('preco_por_cambio')">Preço por Câmbio</button>
+    <button type="button" onclick="altGrafico('preco_por_marca')">Preço por Marca</button>
+    <button type="button" onclick="altGrafico('preco_por_carros')">Preço por Carros</button>
+    <button type="button" onclick="altGrafico('preco_por_combustivel')">Preço por Combustível</button>
+    <button type="button" onclick="altGrafico('preco_por_cambio')">Preço por Câmbio</button>
 </div>
 <div class="main-container">
     <!-- Lado esquerdo: Opções -->
@@ -138,7 +152,7 @@
     <div class="graph-container">
         <h2>Distribuição de Preços</h2>
         {% if grafico_uri %}
-            <img src="{{ grafico_uri }}" alt="Gráfico gerado">
+            <img src="{{ grafico_uri.1 }}" alt="Gráfico gerado" id="graph">
         {% else %}
             <p>Selecione uma opção e clique em "Consultar Previsão de Preço".</p>
         {% endif %}
