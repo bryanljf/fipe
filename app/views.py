@@ -8,9 +8,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import io, base64, urllib
 
-
-
-
 # Funcao para gerar o grafico
 # Basta quando quiser colocar o tipo de grafico que deseja na função como está no home
 def gerar_grafico(tipo):
@@ -30,16 +27,26 @@ def gerar_grafico(tipo):
 
 def home(request): 
     all_brands = DATASET['marca'].unique().tolist()
-    years = list(range(1985,2024))  
+    years = [str(ano) for ano in range(1985, 2024)]
 
     if request.method == "POST":
-        print(request.POST)
         selected_brand = request.POST.get('brand', '')
         selected_model = request.POST.get('model', '')
+        selected_combustivel = request.POST.get('combustivel', '')
+        selected_cambio = request.POST.get('cambio', '')
+        selected_ano = request.POST.get('ano', '')  
         selected_grafico = request.POST.get('grafico_tipo', 'preco_por_marca')
         data = request.POST
 
+        # Obter os modelos com base na marca selecionada
+        if selected_brand:
+            all_models = DATASET.loc[DATASET['marca'] == selected_brand, 'modelo'].unique().tolist()
+        else:
+            all_models = []
+
+        # Gera a previsão de preço com base nos atributos de entrada para o modelo de ML
         predicted_price = model_predict.predict_price(data)
+        # Chave que indica para o HTML mostrar o resultado
         predict_key = 1
 
         # Gerar Grafico escolhendo a distribuicao
@@ -51,21 +58,25 @@ def home(request):
             return JsonResponse({'grafico_uri': grafico_uri})
 
         return render(request, 'home.html', {
-            'marcas': all_brands,
-            'selected_grafico': selected_grafico,
+            'marcas': all_brands, 
             'selected_brand': selected_brand,
             'selected_model': selected_model,
+            'selected_combustivel': selected_combustivel,
+            'selected_cambio': selected_cambio,
+            'selected_grafico': selected_grafico,
             'anos': years,
+            'selected_ano': selected_ano,
+            'modelos': all_models, 
             'predict_key': predict_key,
             'predicted_price': predicted_price,
             'grafico_uri': grafico_uri
-            })
+        })
     else:   
         predict_key = 0
         predicted_price = 0
         selected_grafico = 'preco_por_marca'
 
-        # Gerar Grafico
+            # Gerar Grafico
         grafico_uri = gerar_grafico(selected_grafico)
 
         return render(request, 'home.html', {
@@ -75,8 +86,7 @@ def home(request):
             'selected_grafico': selected_grafico,
             'predicted_price': predicted_price,
             'grafico_uri': grafico_uri
-            })
-
+        })
 
 def get_models(request):
     # Rota para retornar os modelos baseado na marca

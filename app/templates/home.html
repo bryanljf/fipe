@@ -99,7 +99,7 @@
             <select name="model" id="model">
                 <option value="">Selecionar Modelo</option>
                 {% for modelo in modelos %}
-                    <option value="{{ modelo }}" {% if modelo == selected_modelo %}selected{% endif %}>
+                    <option value="{{ modelo }}" {% if modelo == selected_model %}selected{% endif %}>
                         {{ modelo }}
                     </option>
                 {% endfor %}
@@ -111,20 +111,22 @@
                 <option value="Diesel" {% if selected_combustivel == 'Diesel' %}selected{% endif %}>Diesel</option>
                 <option value="Alcohol" {% if selected_combustivel == 'Alcohol' %}selected{% endif %}>Álcool</option>
             </select>
-
+            
             <label for="cambio">Câmbio:</label>
             <select name="cambio" id="cambio">
                 <option value="manual" {% if selected_cambio == 'manual' %}selected{% endif %}>Manual</option>
                 <option value="automatic" {% if selected_cambio == 'automatic' %}selected{% endif %}>Automático</option>
-            </select>
+            </select>   
 
             <label for="ano">Ano:</label>
             <select name="ano" id="ano">
                 {% for ano in anos %}
-                    <option value="{{ ano }}" {% if selected_ano == ano %}selected{% endif %}>{{ ano }}</option>
+                    <option value="{{ ano }}" {% if ano == selected_ano|stringformat:"s" %}selected{% endif %}>
+                        {{ ano }}
+                    </option>
                 {% endfor %}
             </select>
-
+        
             <input type="submit" value="Consultar Previsão de Preço">
             {% if predict_key == 1 %}
                 <p>{{ predicted_price }}</p>
