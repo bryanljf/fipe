@@ -7,6 +7,8 @@ from fipe.settings import BASE_DIR
 csv_path = os.path.join(BASE_DIR, 'app', 'static', 'data', 'fipe_2022.csv')
 pd.set_option('display.max_rows', 200)
 
+output_path = os.path.join(BASE_DIR, 'app', 'static', 'data', 'fipe_2022_processed.csv')
+
 def load_data():
     # Carregando o arquivo CSV
     df = pd.read_csv(csv_path)
@@ -22,7 +24,7 @@ def load_data():
 
     # Renomeando as colunas para português
     df.rename(columns={
-        'brand': 'marca',
+        'brand': 'marca',    
         'model': 'modelo',
         'fuel': 'combustivel',
         'gear': 'cambio',
@@ -35,6 +37,8 @@ def load_data():
 
     # Mapear variáveis categóricas para números
     df = data_maps(df)
+
+    df.to_csv(output_path, index=False)
     
     return df
 
@@ -59,7 +63,7 @@ def data_maps(df: pd.DataFrame) -> pd.DataFrame:
     df['cambio_code'] = df['cambio'].map(tipos_cambio)
 
     # Mantendo apenas as colunas relevantes
-    columns_to_keep = ['modelo', 'marca', 'preco_medio_FIPE', 'modelo_code', 'combustivel_code', 'cambio_code', 'marca_code', 'idade_veiculo']
+    columns_to_keep = ['modelo', 'marca', 'preco_medio_FIPE', 'modelo_code', 'combustivel_code', 'cambio_code', 'marca_code', 'idade_veiculo', 'year_model']
     df = df.drop(columns=[col for col in df.columns if col not in columns_to_keep]) # Mantém apenas as colunas especificadas  
   
 

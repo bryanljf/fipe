@@ -18,11 +18,9 @@ class AppConfig(AppConfig):
             print(f"Ocorreu um erro ao fazer a leitura do dataset: {e}")
             return
         
-        return
-        
         print("Modelo de Machine Learning em treinamento [...]")
         try:
-            ml_model.trainModel(DATASET)
+            ml_model.train_model(DATASET)
             print("Treinamento do modelo realizado com sucesso!")
         except Exception as e:
             print(f"Ocorreu um erro ao fazer o treinamendo do modelo: {e}")

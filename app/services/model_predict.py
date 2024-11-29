@@ -60,18 +60,17 @@ def predict_price(data):
         return predicted_price
 
 def convert_strings(marca, modelo):
-    # Criar um mapa das marcas e modelos (convertendo as strings em índices numéricos)
-    brand_map = {marca: idx for idx, marca in enumerate(DATASET['marca'].unique().tolist())}
-    model_map = {modelo: idx for idx, modelo in enumerate(DATASET['modelo'].unique().tolist())}
+    # Buscar os códigos da marca e do modelo no dataset
+    marca_code = DATASET.loc[DATASET['marca'] == marca, 'marca_code']
+    modelo_code = DATASET.loc[DATASET['modelo'] == modelo, 'modelo_code']
 
-    # Verifica se a marca e o modelo fornecidos estão no conjunto de dados
-    if marca not in brand_map:
-        raise ValueError(f"Marca não encontrada no dataset: {marca}")
-    if modelo not in model_map:
-        raise ValueError(f"Modelo não encontrado no dataset: {modelo}")
-
-    # Retorna os códigos numéricos para a marca e o modelo fornecidos
+    # Verificar se encontrou exatamente um código para cada, se não, gerar erro
+    if marca_code.empty:
+        raise ValueError(f"Marca '{marca}' não encontrada.")
+    if modelo_code.empty:
+        raise ValueError(f"Modelo '{modelo}' não encontrado.")
+    
     return {
-        'marca': brand_map[marca],  # Retorna o código da marca fornecida
-        'modelo': model_map[modelo]  # Retorna o código do modelo fornecido
+        'marca': marca_code.iloc[0],  # Retorna o primeiro código encontrado
+        'modelo': modelo_code.iloc[0] 
     }
