@@ -23,6 +23,14 @@ def gerar_grafico(tipo):
         return distribuicao_preco_por_cambio(DATASET)
     else:
         raise ValueError("Tipo de gráfico inválido")
+    
+def gerar_todos_graficos():
+    return [gerar_grafico('preco_por_carros'),
+    gerar_grafico('preco_por_marca'),
+    #gerar_grafico('preco_por_ano'),
+    gerar_grafico('preco_por_combustivel'),
+    gerar_grafico('preco_por_cambio')]
+
 
 
 def home(request): 
@@ -50,7 +58,7 @@ def home(request):
         predict_key = 1
 
         # Gerar Grafico escolhendo a distribuicao
-        grafico_uri = gerar_grafico(selected_grafico)
+        grafico_uri = gerar_todos_graficos()
 
         # Se for uma requisição AJAX, retorna apenas o gráfico em formato JSON
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -77,7 +85,7 @@ def home(request):
         selected_grafico = 'preco_por_marca'
 
             # Gerar Grafico
-        grafico_uri = gerar_grafico(selected_grafico)
+        grafico_uri = gerar_todos_graficos()
 
         return render(request, 'home.html', {
             'marcas': all_brands,
