@@ -24,6 +24,7 @@ python manage.py runsserver --noreload
 
 ## Instruções/Funcionalidades
 * Para iniciar, é necessário que o arquivo '.csv' do dataset esteja presente na pasta "static/data";
+* A leitura do dataset é feita automaticamente ao iniciar o servidor local;
 * Caso o localhost não tenha o modelo de aprendizado de máquina salvo, o sistema automaticamente iniciára o treinamento pré-estabelecido do modelo;
 * O dashboard contém uma série de gráficos que podem ser observados dinâmicamente, apenas sendo necessário pressionar o botão correspondente;
 * Com base nas informações do form é possível gerar uma previsão do valor FIPE do veículo, com base no treinamento do modelo feito anteriormente e a leitura dos dados do dataset base.
