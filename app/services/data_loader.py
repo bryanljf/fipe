@@ -63,15 +63,8 @@ def data_maps(df: pd.DataFrame) -> pd.DataFrame:
     df['cambio_code'] = df['cambio'].map(tipos_cambio)
 
     # Mantendo apenas as colunas relevantes
-    columns_to_keep = ['modelo', 'marca', 'preco_medio_FIPE', 'modelo_code', 'combustivel_code', 'cambio_code', 'marca_code', 'idade_veiculo', 'year_model']
+    columns_to_keep = ['modelo', 'marca', 'preco_medio_FIPE', 'modelo_code', 'combustivel', 'cambio', 'combustivel_code', 'cambio_code', 'marca_code', 'idade_veiculo', 'year_model']
     df = df.drop(columns=[col for col in df.columns if col not in columns_to_keep]) # Mantém apenas as colunas especificadas  
-  
-
-    # Renomeando as colunas para refletir o código mapeado
-    df.rename(columns={
-        'combustivel_code': 'combustivel',
-        'cambio_code': 'cambio'
-    }, inplace=True)
 
     return df
 

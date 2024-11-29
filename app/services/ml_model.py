@@ -10,7 +10,7 @@ pkl_path = os.path.join(BASE_DIR, 'app', 'static', 'media', 'model_fipe.pkl')
 # Treinamento do modelo com base no dataset
 def train_model(df):
     # Definindo as variáveis independentes (X), removendo colunas não necessárias para a previsão
-    X = df[['marca_code', 'modelo_code', 'combustivel', 'cambio', 'idade_veiculo']]
+    X = df[['marca_code', 'modelo_code', 'combustivel_code', 'cambio_code', 'idade_veiculo']]
     
     # Definindo a variável dependente (y) que queremos prever
     y = df['preco_medio_FIPE']

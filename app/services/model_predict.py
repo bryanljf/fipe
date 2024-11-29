@@ -4,7 +4,6 @@ import joblib
 import pandas as pd
 from app.apps import DATASET
 from fipe.settings import BASE_DIR
-from app.services import data_loader
 
 # Previsão de preço, com base nas informações de entrada através do aprendizado de máquina
 pkl_path = os.path.join(BASE_DIR, 'app', 'static', 'media', 'model_fipe.pkl')
@@ -46,18 +45,26 @@ def predict_price(data):
         features = pd.DataFrame({
             'marca_code': [marca],
             'modelo_code': [modelo],
-            'combustivel': [combustivel],
-            'cambio': [cambio],
+            'combustivel_code': [combustivel],
+            'cambio_code': [cambio],
             'idade_veiculo': [idade_veiculo]
         })
-
-        print(features)
 
         # Prever o preço utilizando o modelo treinado
         predicted_price = model.predict(features)[0]
 
-        # Retornar a previsão 
-        return predicted_price
+        # Arredondar o valor para o múltiplo de 500 mais próximo
+        rounded_price = round(predicted_price / 500) * 500
+
+        # Arredondar para inteiro
+        rounded_price_int = int(rounded_price)
+
+        # Formatar o valor como R$ e incluir pontos nos milhares
+        formatted_price = f"R$ {rounded_price_int:,}".replace(",", ".")
+
+        # Retornar o preço formatado
+        return formatted_price
+
 
 def convert_strings(marca, modelo):
     # Buscar os códigos da marca e do modelo no dataset
