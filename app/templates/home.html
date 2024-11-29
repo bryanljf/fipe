@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Tabela Fipe</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <script>
         // Função para carregar os modelos de acordo com a marca selecionada
         function carregarModelos() {
@@ -44,11 +45,12 @@
     </script>
 </head>
 <body>
-    <div>
+<div class="main-container">
+    <!-- Lado esquerdo: Opções -->
+    <div class="options-container">
         <form action="{% url 'home' %}" method="POST">
             {% csrf_token %}
-
-            <label for="brand">Marca:</label> 
+            <label for="brand">Marca:</label>
             <select name="brand" id="brand">
                 <option value="">Selecionar Marca</option>
                 {% for marca in marcas %}
@@ -58,9 +60,9 @@
                 {% endfor %}
             </select>
 
-            <label for="model">Modelo:</label> 
+            <label for="model">Modelo:</label>
             <select name="model" id="model">
-                <option value="">Selecionar Marca</option>
+                <option value="">Selecionar Modelo</option>
                 {% for modelo in modelos %}
                     <option value="{{ modelo }}" {% if modelo == selected_modelo %}selected{% endif %}>
                         {{ modelo }}
@@ -81,7 +83,6 @@
                 <option value="automatic" {% if selected_cambio == 'automatic' %}selected{% endif %}>Automático</option>
             </select>
 
-            <!-- Select para ano -->
             <label for="ano">Ano:</label>
             <select name="ano" id="ano">
                 {% for ano in anos %}
@@ -90,18 +91,21 @@
             </select>
 
             <input type="submit" value="Consultar Previsão de Preço">
-
-            {% if predict_key == 1%}
+            {% if predict_key == 1 %}
                 <p>{{ predicted_price }}</p>
             {% endif %}
         </form>
     </div>
-    
-    <!-- Adicionando o gráfico gerado --> 
-    <div> 
-        <h2>Distribuição de Preços</h2> 
-        <img src="{{ grafico_uri }}" alt="Gráfico gerado">
-    </div>
 
+    <!-- Lado direito: Gráfico -->
+    <div class="graph-container">
+        <h2>Distribuição de Preços</h2>
+        {% if grafico_uri %}
+            <img src="{{ grafico_uri }}" alt="Gráfico gerado">
+        {% else %}
+            <p>Selecione uma opção e clique em "Consultar Previsão de Preço".</p>
+        {% endif %}
+    </div>
+</div>
 </body>
 </html>

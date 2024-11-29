@@ -32,6 +32,7 @@ def distribuicao_preco_por_marca(dataset):
     plt.xlabel('Marca')
     plt.ylabel('Preço Médio (BRL)')
     plt.xticks(rotation=90)  # Rotaciona os nomes das marcas para ficar legível
+    plt.tight_layout()  # ajuste para dar mais espaçamento
     
     return salvar_grafico_em_base64()
 
