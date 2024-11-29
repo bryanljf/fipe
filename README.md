@@ -1,7 +1,7 @@
 # Dashboard Tabela FIPE
 
 ## Resumo do Projeto
-Projeto de uma aplicação web simulando um dashboard interativo com dados retirados a partir de um dataset
+Projeto de uma aplicação web para um dashboard interativo com dados retirados a partir de um dataset
 de valores da Tabela FIPE. Possui funcionalidades como observação dinâmica de diversos gráficos em relação aos
 dados do dataset e previsão de preços FIPE feitos com aprendizado de máquina.
 Trabalho desenvolvido para a disciplina de "Tópicos Especiais em Software" da Universidade Positivo.
