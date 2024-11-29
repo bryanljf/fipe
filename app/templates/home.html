@@ -42,9 +42,44 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("brand").addEventListener("change", carregarModelos);
         });
+        
+        // Função para mostrar o gráfico de acordo com o tipo selecionado
+        function mostrarGrafico(tipo) {
+            // Define valores padrão para 'brand' e 'model'
+            const defaultBrand = "Acura";  // Altere conforme necessário
+            const defaultModel = "NSX 3.0";  // Altere conforme necessário
+
+            // Envia a solicitação AJAX para o servidor
+            fetch("{% url 'home' %}", {
+                method: "POST",  // Envia via POST
+                headers: {
+                    "Content-Type": "application/json",  // Define que os dados são em formato JSON
+                    "X-CSRFToken": "{{ csrf_token }}"  // CSRF Token para segurança
+                },
+                body: JSON.stringify({  // Dados que você está enviando
+                    'grafico_tipo': tipo,         // O tipo de gráfico selecionado
+                    'brand': defaultBrand,        // Envia o valor padrão para 'brand'
+                    'model': defaultModel         // Envia o valor padrão para 'model'
+                })
+            })
+                .then(response => response.json())  // Espera a resposta em JSON
+                .then(data => {
+                    // Atualiza o gráfico com o novo gráfico URI
+                    document.getElementById("grafico-container").innerHTML = `<img src="${{grafico_uri}}" alt="Gráfico gerado" id="grafico-atual">`;
+                })
+                .catch(error => {
+                    console.error("Erro ao gerar gráfico:", error);
+                });
+        }
     </script>
 </head>
 <body>
+<div class="button-container">
+    <button type="button" onclick="mostrarGrafico('preco_por_marca')">Preço por Marca</button>
+    <button type="button" onclick="mostrarGrafico('preco_por_ano')">Preço por Ano</button>
+    <button type="button" onclick="mostrarGrafico('preco_por_combustivel')">Preço por Combustível</button>
+    <button type="button" onclick="mostrarGrafico('preco_por_cambio')">Preço por Câmbio</button>
+</div>
 <div class="main-container">
     <!-- Lado esquerdo: Opções -->
     <div class="options-container">

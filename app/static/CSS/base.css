@@ -77,3 +77,30 @@ body {
         width: 100%;
     }
 }
+
+/* Estilizando o contêiner dos botões */
+.button-container {
+    display: flex;              /* Flexbox para alinhar os botões em linha */
+    font-family: Arial, sans-serif;
+    justify-content: space-evenly; /* distribui os botoes no espaço */
+    gap: 10px;                  /* Espaçamento entre os botões */
+    margin: 20px 0;             /* Margem superior e inferior para separar do restante da página */
+    padding: 10px;
+    background-color: #3c3c3c;  /* Cor de fundo (opcional) */
+    border-radius: 8px;         /* Bordas arredondadas (opcional) */
+}
+
+.button-container button {
+    padding: 10px 20px;         /* Espaçamento interno dos botões */
+    font-size: 16px;            /* Tamanho da fonte */
+    background-color: #007BFF;  /* Cor de fundo azul */
+    color: white;               /* Cor do texto */
+    border: none;               /* Remove borda padrão */
+    border-radius: 5px;         /* Bordas arredondadas */
+    cursor: pointer;            /* Cursor de ponteiro ao passar por cima */
+    transition: background-color 0.3s ease; /* Animação suave de cor */
+}
+
+.button-container button:hover {
+    background-color: #0056b3;  /* Cor do botão quando o mouse passa por cima */
+}

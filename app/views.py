@@ -35,17 +35,24 @@ def home(request):
     if request.method == "POST":
         print(request.POST)
         selected_brand = request.POST.get('brand', '')
-        selected_model = request.POST.get('model', '')  
+        selected_model = request.POST.get('model', '')
+        selected_grafico = request.POST.get('grafico_tipo', 'preco_por_marca')
         data = request.POST
 
         predicted_price = model_predict.predict_price(data)
         predict_key = 1
 
         # Gerar Grafico escolhendo a distribuicao
-        grafico_uri = gerar_grafico('preco_por_marca')
+        grafico_uri = gerar_grafico(selected_grafico)
+
+        # Se for uma requisição AJAX, retorna apenas o gráfico em formato JSON
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            # Se for uma requisição AJAX, retorna apenas o gráfico em formato JSON
+            return JsonResponse({'grafico_uri': grafico_uri})
 
         return render(request, 'home.html', {
-            'marcas': all_brands, 
+            'marcas': all_brands,
+            'selected_grafico': selected_grafico,
             'selected_brand': selected_brand,
             'selected_model': selected_model,
             'anos': years,
@@ -56,18 +63,21 @@ def home(request):
     else:   
         predict_key = 0
         predicted_price = 0
+        selected_grafico = 'preco_por_marca'
 
         # Gerar Grafico
-        grafico_uri = gerar_grafico('preco_por_marca')
+        grafico_uri = gerar_grafico(selected_grafico)
 
         return render(request, 'home.html', {
             'marcas': all_brands,
             'anos': years,
             'predict_key': predict_key,
+            'selected_grafico': selected_grafico,
             'predicted_price': predicted_price,
             'grafico_uri': grafico_uri
             })
-    
+
+
 def get_models(request):
     # Rota para retornar os modelos baseado na marca
     selected_brand = request.GET.get('marca', '')

@@ -28,10 +28,10 @@ Previsão de Valores de Carros com base na tabela FIPE
 
 # Divisão de tarefas
 
-Membro 1: Desenvolvimento da aplicação web (Django/Flask).
-Membro 2: Manipulação de dados, EDA, e criação de gráficos (Pandas, Seaborn, Matplotlib).
-Membro 3: Modelagem de machine learning e integração do modelo (Scikit-learn).
-Membro 4: Documentação, elaboração do README e preparação da apresentação.
+- Membro 1: Desenvolvimento da aplicação web (Django/Flask).
+- Membro 2: Manipulação de dados, EDA, e criação de gráficos (Pandas, Seaborn, Matplotlib).
+- Membro 3: Modelagem de machine learning e integração do modelo (Scikit-learn).
+- Membro 4: Documentação, elaboração do README e preparação da apresentação.
 
 # RECURSOS
 
